@@ -30,11 +30,13 @@ for dt in data_list:
     else:
       pass
 
+# outliers detection and removal
+
 # satisfaction bar chart
-fig = plt.figure(figsize = (8,5))
+plt.figure(figsize = (8,5))
 train.satisfaction.value_counts(normalize = True).plot(kind='bar', color= ['darkorange','steelblue'], alpha = 0.9, rot=0)
-plt.title('Satisfaction Indicator (0) and (1) in the Dataset')
-plt.show()
+plt.title('Satisfaction Indicator satisfied(0) and neutral or dissatisfied(1) in the Dataset')
+# plt.show()
 
 ###########################################################
 
@@ -44,11 +46,16 @@ x_train=train.drop(["satisfaction"],axis=1)
 y_test=test["satisfaction"]
 x_test=test.drop(["satisfaction"],axis=1)
 
-# #training
+#training
 clf=RandomForestRegressor(n_estimators=100,max_depth=None,min_samples_split=2,random_state=8)
 clf.fit(x_train,y_train)
 
+#other ensembles 
+
+#print all the accuracy rates
 print(f"accuracy :{clf.score(x_test,y_test)}")
+
+#compare the accuracy rates in a chart
 
 #print feature importances in order
 dic=dict(zip(x_train.columns,clf.feature_importances_))
@@ -61,4 +68,4 @@ importances_sorted = importances.sort_values()
 plt.figure(figsize=(9,9))
 importances_sorted.plot(kind='barh')
 plt.title('Features Importances')
-plt.show()
+# plt.show()
