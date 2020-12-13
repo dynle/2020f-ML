@@ -122,10 +122,12 @@ all_models=sorted(all_models,key=lambda x:x[0])
 accuracy_values=[x[0] for x in all_models]
 models=[x[1] for x in all_models]
 
-plt.barh(models,accuracy_values,align='center',height=0.5)
+plt.barh(models,accuracy_values,align='center',height=0.5, color='steelblue')
+for i, v in enumerate(accuracy_values):
+    plt.text(v,i-.05,str(round(v,3)),color='black',fontweight='bold')
 plt.ylabel('Models')
 plt.xlabel('Accuracy')
-plt.title('Accuracy values')
+plt.title('Accuracy values',fontweight='bold')
 plt.show()
 
 
@@ -138,6 +140,8 @@ for item in sorted(dic.items(), key=lambda x: x[1], reverse=True):
 importances = pd.Series(data=clf.feature_importances_,index= x_train.columns)
 importances_sorted = importances.sort_values()
 plt.figure(figsize=(9,9))
+for i, v in enumerate(importances_sorted):
+    plt.text(v,i-.2,str(round(v,3)),color='black',fontweight='bold')
 importances_sorted.plot(kind='barh')
 plt.title('Features Importances')
 plt.show()
