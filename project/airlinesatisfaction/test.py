@@ -34,9 +34,8 @@ for dt in data_list:
   imp = imp.fit(dt[['Arrival Delay in Minutes']])
   dt['Arrival Delay in Minutes'] = imp.transform(dt[['Arrival Delay in Minutes']])
 
-from sklearn.preprocessing import LabelEncoder
 # str -> int
-
+from sklearn.preprocessing import LabelEncoder
 le = LabelEncoder()
 for dt in data_list:
   for i in dt.columns.values.tolist():
@@ -47,12 +46,12 @@ for dt in data_list:
 
 import matplotlib.pyplot as plt 
 # # See the data whether there are obvious outliers or not
-# plt.figure()
-# xx=np.linspace(0,len(train),len(train))
-# plt.scatter(xx, train['Arrival Delay in Minutes'])
-# plt.xlabel('passengers')
-# plt.ylabel('Arrival Delay in Minutes')
-# plt.show()
+plt.figure()
+xx=np.linspace(0,len(train),len(train))
+plt.scatter(xx, train['Arrival Delay in Minutes'])
+plt.xlabel('passengers')
+plt.ylabel('Arrival Delay in Minutes')
+plt.show()
 
 
 #  Get IQR
@@ -69,10 +68,18 @@ import matplotlib.pyplot as plt
 #clean up the data by removing the outliers
 
 # satisfaction bar chart
-# plt.figure(figsize = (8,5))
-# train.satisfaction.value_counts(normalize = True).plot(kind='bar', color= ['darkorange','steelblue'],rot=0)
-# plt.title('Satisfaction Indicator satisfied(0) and neutral or dissatisfied(1) in the Dataset')
-# plt.show()
+plt.figure(figsize = (8,5))
+train.satisfaction.value_counts(normalize = True).plot(kind='bar', color= ['darkorange','steelblue'],rot=0)
+plt.title('Satisfaction Indicator satisfied(0) and neutral or dissatisfied(1) in the Dataset',fontweight='bold',fontsize=20)
+plt.show()
+
+# Heatmap
+import seaborn as sns
+plt.figure(figsize=(12,12))
+list_columns=train.columns.values.tolist()
+sns.heatmap(train[list_columns].corr(),annot=True,fmt=".2f",cmap='YlGnBu')
+plt.title('Heatmap for parameters in the train data set',fontweight='bold',fontsize=20)
+plt.show()
 
 ###########################################################
 
@@ -82,7 +89,7 @@ x_train=train.drop(["satisfaction"],axis=1)
 y_test=test["satisfaction"]
 x_test=test.drop(["satisfaction"],axis=1)
 
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier, ExtraTreesRegressor,ExtraTreesClassifier, AdaBoostRegressor,AdaBoostClassifier, BaggingRegressor, StackingRegressor, VotingRegressor
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier, ExtraTreesRegressor,ExtraTreesClassifier, AdaBoostRegressor,AdaBoostClassifier
 
 # training
 clf=RandomForestClassifier(n_estimators=100,max_depth=None,min_samples_split=2,random_state=8)
@@ -127,9 +134,8 @@ for i, v in enumerate(accuracy_values):
     plt.text(v,i-.05,str(round(v,3)),color='black',fontweight='bold')
 plt.ylabel('Models')
 plt.xlabel('Accuracy')
-plt.title('Accuracy values',fontweight='bold')
+plt.title('Accuracy values',fontweight='bold',fontsize=20)
 plt.show()
-
 
 # print feature importances in order
 dic=dict(zip(x_train.columns,clf.feature_importances_))
