@@ -46,12 +46,12 @@ for dt in data_list:
 
 import matplotlib.pyplot as plt 
 # # See the data whether there are obvious outliers or not
-plt.figure()
-xx=np.linspace(0,len(train),len(train))
-plt.scatter(xx, train['Arrival Delay in Minutes'])
-plt.xlabel('passengers')
-plt.ylabel('Arrival Delay in Minutes')
-plt.show()
+# plt.figure()
+# xx=np.linspace(0,len(train),len(train))
+# plt.scatter(xx, train['Arrival Delay in Minutes'])
+# plt.xlabel('passengers')
+# plt.ylabel('Arrival Delay in Minutes')
+# plt.show()
 
 
 #  Get IQR
@@ -66,12 +66,13 @@ plt.show()
 
 # outliers detection and removal (to increase the precision of ensemble model)
 #clean up the data by removing the outliers
+train = train[train['Arrival Delay in Minutes'] <= 1200]
 
 # satisfaction bar chart
 plt.figure(figsize = (8,5))
 train.satisfaction.value_counts(normalize = True).plot(kind='bar', color= ['darkorange','steelblue'],rot=0)
 plt.title('Satisfaction Indicator satisfied(0) and neutral or dissatisfied(1) in the Dataset',fontweight='bold',fontsize=20)
-plt.show()
+# plt.show()
 
 # Heatmap
 import seaborn as sns
@@ -79,7 +80,7 @@ plt.figure(figsize=(12,12))
 list_columns=train.columns.values.tolist()
 sns.heatmap(train[list_columns].corr(),annot=True,fmt=".2f",cmap='YlGnBu')
 plt.title('Heatmap for parameters in the train data set',fontweight='bold',fontsize=20)
-plt.show()
+# plt.show()
 
 ###########################################################
 
@@ -97,10 +98,10 @@ clf.fit(x_train,y_train)
 acc_rfc= (clf.score(x_test,y_test),'RandomForestClassifier')
 print(f"accuracy RandomForestClassifier :{acc_rfc[0]}")
 
-clf2=RandomForestRegressor(n_estimators=100,max_depth=None,min_samples_split=2,random_state=8)
-clf2.fit(x_train,y_train)
-acc_rfr= (clf2.score(x_test,y_test),'RandomForestRegressor')
-print(f"accuracy RandomForestRegressor :{acc_rfr[0]}")
+# clf2=RandomForestRegressor(n_estimators=100,max_depth=None,min_samples_split=2,random_state=8)
+# clf2.fit(x_train,y_train)
+# acc_rfr= (clf2.score(x_test,y_test),'RandomForestRegressor')
+# print(f"accuracy RandomForestRegressor :{acc_rfr[0]}")
 
 # clf3=ExtraTreesClassifier(n_estimators=100,max_depth=None,min_samples_split=2,random_state=8)
 # clf3.fit(x_train,y_train)
@@ -123,19 +124,19 @@ print(f"accuracy RandomForestRegressor :{acc_rfr[0]}")
 # print(f"accuracy AdaBoostRegressor:{clf5.score(x_test,y_test)}")
 
 # #compare the accuracy rates in a chart
-all_models=[acc_rfc,acc_rfr]
-all_models=sorted(all_models,key=lambda x:x[0])
+# all_models=[acc_rfc,acc_rfr]
+# all_models=sorted(all_models,key=lambda x:x[0])
 
-accuracy_values=[x[0] for x in all_models]
-models=[x[1] for x in all_models]
+# accuracy_values=[x[0] for x in all_models]
+# models=[x[1] for x in all_models]
 
-plt.barh(models,accuracy_values,align='center',height=0.5, color='steelblue')
-for i, v in enumerate(accuracy_values):
-    plt.text(v,i-.05,str(round(v,3)),color='black',fontweight='bold')
-plt.ylabel('Models')
-plt.xlabel('Accuracy')
-plt.title('Accuracy values',fontweight='bold',fontsize=20)
-plt.show()
+# plt.barh(models,accuracy_values,align='center',height=0.5, color='steelblue')
+# for i, v in enumerate(accuracy_values):
+#     plt.text(v,i-.05,str(round(v,3)),color='black',fontweight='bold')
+# plt.ylabel('Models')
+# plt.xlabel('Accuracy')
+# plt.title('Accuracy values',fontweight='bold',fontsize=20)
+# plt.show()
 
 # print feature importances in order
 dic=dict(zip(x_train.columns,clf.feature_importances_))
@@ -150,4 +151,4 @@ for i, v in enumerate(importances_sorted):
     plt.text(v,i-.2,str(round(v,3)),color='black',fontweight='bold')
 importances_sorted.plot(kind='barh')
 plt.title('Features Importances')
-plt.show()
+# plt.show()
