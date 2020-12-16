@@ -1,4 +1,4 @@
-# https://www.tsa.gov/coronavirus/passenger-throughput?page=0
+# data from: https://www.tsa.gov/coronavirus/passenger-throughput?page=0
 
 import csv 
 import requests
@@ -24,5 +24,7 @@ for i in range(1,-1,-1):
     for j in range(len(date_data)-1,-1,-1):
         data=[date_data[j],num_data[j]]
         wr.writerow(data)
-
 f.close()
+
+
+
