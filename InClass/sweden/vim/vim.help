@@ -1,7 +1,0 @@
-replace only second
-1,$s/first\(.\{-}\)first/first\1second/gp
-second , is deleted in line
-1,$s/,\(.\{-}\),/,\1,/gp
-
-xxx,"1,000" -> xxx,1000"
-1,$s/\("*\),\(*"\)/\1\2/gp
