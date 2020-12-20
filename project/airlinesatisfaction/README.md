@@ -2,6 +2,8 @@
 
 ## Which services in what order do airline companies in the United States have to improve in order to attract as many passengers having not traveled from the beginning of the year due to Covid-19 as possible from now.
 
+### Conclusion
+
 The traffic trend calculated by polyfit( ) and poly1d( ) functions shows the trend line keeps go up and recovers the traffic before affected by Covid-19 from current situation in only 34 days. The increasing trend is reliable to some extent, but such the rapid increasing rate is suspicious therefore it would be better to use other prediction techniques related with deep learning in order to predict the future traffic more precisely.
 
 From the trends of number of new cases and passengers calculated by numpy, the traffic would increase regardless of increasing new cases for now. The increasing rate of the traffic would even more rapidly rise if vaccine efficacy works in the US where has started to provide the vaccine from December 14. Therefore, airline companies have to improve their services as soon as possible to prepare for attracting potential passengers.
