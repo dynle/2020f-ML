@@ -1,4 +1,4 @@
-# 2020f-ML
-2020F Keio University - Machine Learning Seminar
+# Machine Learning Study
+2020 Fall Keio University - Machine Learning Seminar
 
-My personal ML study on project/airlinesatisfaction
+Click [here](./project/airlinesatisfaction) (`project/airlinesatisfaction`) to check my personal ML paper.
